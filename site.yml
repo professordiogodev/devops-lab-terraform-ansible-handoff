@@ -1,0 +1,23 @@
+---
+# TODO: three plays, modules only (no shell, command, raw or script). Running it twice must change nothing.
+#
+# Play 1, hosts: all   (become: true)
+#   - packages curl and jq installed (apt, update_cache with cache_valid_time)
+#   - system group and user "pollie", no login shell, no home
+#   - /opt/pollie exists, owned by pollie
+#   - /etc/motd says "Managed by Ansible" and the server's inventory name
+#
+# Play 2, hosts: role_app   (become: true)
+#   - files/pollie_status.py copied to /opt/pollie/pollie_status.py (mode 0755)
+#   - templates/status.json.j2 rendered to /opt/pollie/status.json
+#   - files/pollie-status.service copied to /etc/systemd/system/, then systemd daemon_reload
+#     (as a handler that also restarts the service)
+#   - the service pollie-status enabled and started
+#
+# Play 3, hosts: role_web   (become: true)
+#   - nginx installed, Ubuntu's default site removed
+#   - Pollie's web files (pollie/web/) copied to /var/www/pollie
+#   - templates/pollie.conf.j2 rendered to /etc/nginx/conf.d/pollie.conf, nginx reloaded by a handler
+#   - nginx enabled and running
+#
+# The web play needs facts about a DIFFERENT group's host. Look at hostvars and groups in the Ansible docs.

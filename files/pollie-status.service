@@ -1,0 +1,11 @@
+[Unit]
+Description=Pollie status service
+After=network.target
+
+[Service]
+User=pollie
+ExecStart=/usr/bin/python3 /opt/pollie/pollie_status.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

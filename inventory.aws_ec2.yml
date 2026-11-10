@@ -1,0 +1,8 @@
+# TODO: a dynamic inventory. No IP addresses in this file.
+#   plugin: amazon.aws.aws_ec2
+#   - region us-east-1
+#   - filters: only instances tagged lab=terraform-ansible-handoff that are running
+#   - hostnames: use the Name tag, so the hosts are called pollie-web and pollie-app
+#   - keyed_groups: build groups from the Role tag with the prefix "role"  -> role_web, role_app
+#   - compose: ansible_host must be the public IP address
+# Test it:  ansible-inventory --graph    and    ansible-inventory --host pollie-web

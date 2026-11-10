@@ -1,0 +1,7 @@
+{# TODO: an Nginx server block that
+     - has a comment saying the file is managed by Ansible
+     - listens on port 80 and serves /var/www/pollie
+     - adds the response header  X-Served-By  with this server's inventory name
+     - proxies  /api/  to the app server on port 8000, using the app server's PRIVATE IP taken from the inventory
+       (location /api/ { proxy_pass http://<ip>:8000/; }  so that /api/status reaches /status)
+   The private IP must NOT be written by hand anywhere. #}
