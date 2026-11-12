@@ -22,11 +22,17 @@
 
 ## 🎬 The situation
 
-<p align="center"><img src="assets/gifs/situation.gif" width="300" alt="Animation: terraform apply, then ansible-playbook"></p>
+<p align="center"><img src="assets/gifs/situation.gif" width="300" alt="A server replaced and found again by tag instead of by address"></p>
 
-Pollie's web site needs two servers: a web server for the public and a small app server that only the web server may talk to. Last time, the servers were built with Terraform by one engineer and configured with Ansible by another, and the glue between them was a text file with two IP addresses that somebody pasted by hand. Then a server was replaced, the IP changed, nobody updated the file, and Nginx spent a day proxying to a machine that no longer existed.
+**Terraform:** *"I make things exist. I created your two servers. I know their addresses."*
 
-Terraform is good at *making things exist*. Ansible is good at *making things correct*. Neither knows about the other. You will build the handoff so that no human carries an IP address from one to the other: **Terraform tags the servers, Ansible finds them by tag.** Then you will prove it by destroying a server and getting the whole thing back with two commands.
+**Ansible:** *"I make things correct. I configure whatever is in my inventory. I have no idea how servers get born."*
+
+**Terraform:** *"Then how do you know where they are?"*
+
+**Ansible:** *"A text file with two IP addresses that somebody pasted by hand."*
+
+That is how it worked last time. Then a server was replaced, the IP changed, nobody updated the file, and Nginx spent a day proxying to a machine that no longer existed. Pollie's web site needs two servers: a web server for the public and a small app server that only the web server may talk to. You will build the handoff so that no human carries an address from one tool to the other: **Terraform tags the servers, Ansible finds them by tag.** Then you will destroy a server and heal the whole thing with two commands.
 
 > [!IMPORTANT]
 > **Your mission**
