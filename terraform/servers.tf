@@ -1,5 +1,5 @@
 # TODO 1: an aws_key_pair "lab" from the public key file (file(var.public_key_path)).
-#         Name it "handoff-key".
+#         Key pair names are unique in the whole AWS account and your class shares it: name it "handoff-${local.student}".
 #
 # TODO 2: two security groups in the VPC from main.tf
 #   "web": port 80 from anywhere, port 22 from var.my_ip_cidr only, all traffic out

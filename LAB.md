@@ -21,6 +21,9 @@ That is how it worked last time. Then a server was replaced, the IP changed, nob
 
 **Time:** 105-120 min | **Cost:** free tier, a few cents | **You need:** an AWS administrator user, the AWS CLI v2, Terraform 1.10 or newer, Ansible (`ansible-core` 2.15 or newer) with the `amazon.aws` collection and `boto3`, git, curl and a terminal. On Windows use WSL. Everything uses `us-east-1`.
 
+> **Note** You share one AWS account with your whole class, so every resource this lab creates carries a `student` tag with your **handle**: your IAM user name in lowercase (`.lab/handle.sh` prints it). The provided `data "external"` block in `terraform/main.tf` adds the tag for you, so leave it alone. The checks and the teardown proof only look at resources with your handle, and never touch your classmates'.
+
+
 ---
 
 ## Part 0 - Prepare your machine
@@ -71,7 +74,7 @@ terraform apply
 
 Ansible needs a list of machines. A static `inventory.ini` would hold two IPs that go stale. Instead use the **`amazon.aws.aws_ec2` inventory plugin**: it asks AWS "which instances exist?" every time you run Ansible.
 
-Fill in `inventory.aws_ec2.yml` and `ansible.cfg` following the comments. Then look at what Ansible sees:
+Fill in `inventory.aws_ec2.yml` and `ansible.cfg` following the comments. The inventory must only find **your** servers: filter on your handle as well as on the lab tag (`.lab/handle.sh` prints it). Then look at what Ansible sees:
 
 ```bash
 ansible-inventory --graph

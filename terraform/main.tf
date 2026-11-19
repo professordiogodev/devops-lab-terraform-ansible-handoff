@@ -6,7 +6,21 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 6.0"
     }
+    external = {
+      source  = "hashicorp/external"
+      version = "~> 2.3"
+    }
   }
+}
+
+# Provided: your handle (your IAM user name, shortened). Everyone in this class shares one AWS account,
+# so every resource is tagged with it and the checks only look at yours.
+data "external" "me" {
+  program = ["bash", "${path.module}/../.lab/handle.sh", "--json"]
+}
+
+locals {
+  student = data.external.me.result.student
 }
 
 provider "aws" {
@@ -14,7 +28,8 @@ provider "aws" {
 
   default_tags {
     tags = {
-      lab = "terraform-ansible-handoff"
+      lab     = "terraform-ansible-handoff"
+      student = data.external.me.result.student
     }
   }
 }
