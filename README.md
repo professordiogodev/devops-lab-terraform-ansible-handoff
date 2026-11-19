@@ -3,7 +3,7 @@
 | | |
 |-|-|
 | **Time** | 105-120 min |
-| **Cost** | free tier, a few cents |
+| **Cost** | a few cents (destroy it when you finish) |
 | **You need** | An AWS administrator user, the AWS CLI v2, Terraform 1.10 or newer, Ansible (ansible-core 2.15 or newer, with the amazon.aws collection and boto3), git, curl and a terminal (Linux, macOS, or Windows with WSL) |
 
 ## How this lab works
